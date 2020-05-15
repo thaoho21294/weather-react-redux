@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import LocationSearchBar from './components/LocationSearchBar'
+import DayList from './components/DayList';
+import { defaultLocation } from './mockData';
 
 function App() {
+  const [location, setLocation] = useState(defaultLocation);
+
+  function onSearch(foundLocation) {
+    if (foundLocation) {
+      setLocation(foundLocation)
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h3>This is the app with mock data, we have weather data of Ho Chi Minh, Houston and Phoenix</h3>
+        <section>
+          <LocationSearchBar onSearch={onSearch}/>
+        </section>
+        <section>
+          <DayList location={location}></DayList>
+        </section>
     </div>
   );
 }

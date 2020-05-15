@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.days {
+  display: flex;
+  justify-content: space-between;
+  border: 3px dashed gray;
+  padding: 1.5rem;
+}
+
+.day {
+  border: 3px solid gray;
+  width: 10rem;
+  height: 10rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dayName {
+  line-height: 3rem;
+}
+
+section {
+  padding: 1.5rem;
+}
