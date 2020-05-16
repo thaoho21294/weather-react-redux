@@ -19,7 +19,7 @@ export default function DayList ({ location }) {
     <React.Fragment>
     { state.country && <div className="text-info">Country: {state.country}</div> }
     <div className="days">
-      {state.days.map((day) => {
+      {(state.days || []).map((day) => {
         return <div className="day" key={day.id}>
           <div className="dayName">{toWeekday(day.applicable_date)}</div>
           <div>{Math.round(day.min_temp)}</div>

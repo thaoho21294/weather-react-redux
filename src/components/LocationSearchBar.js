@@ -23,7 +23,7 @@ export default function LocationSearchBar({ onSearch }) {
       <Form inline onSubmit={onSubmit}>
         <FormControl name="search" type="text" placeholder="Press Enter to search..." className="mr-sm-2" />
       </Form>
-      {state.foundLocation && <div className="text-info">found: {state.foundLocation.title}</div> }
+      { state.foundLocation && <div className="text-info">found: {state.foundLocation.title}</div> }
       { state.error && <div className="text-danger">{state.error}</div> }
       { state.loading && <div className="text-info">loading...</div> }
   </React.Fragment>
