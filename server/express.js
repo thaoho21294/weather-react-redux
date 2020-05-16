@@ -1,10 +1,21 @@
 const express = require('express');
 const app = express();
-const url = 'https://www.metaweather.com/api';
+const base_url = 'https://www.metaweather.com/api';
 const fetch   = require('node-fetch');
 
+app.get('/location/search', (req, res) => {
+    fetch(base_url + '/location/search/?query=' + req.query.query)
+    .then(res => res.json())
+    .then(data => {
+        res.send({ data });
+    })
+    .catch(err => {
+        res.send(req.query.query);
+    });
+});
+
 app.get('/location/:woeid', (req, res) => {   
-  fetch(url + '/location/' + req.params.woeid)
+  fetch(base_url + '/location/' + req.params.woeid)
   .then(res => res.json())
   .then(data => {
       res.send({ data });
@@ -13,10 +24,6 @@ app.get('/location/:woeid', (req, res) => {
       res.send(err);
   });
 });
-
-app.get('/hi', (req, res) => {
-    res.send('hello');
-})
 
 const server = app.listen(4000, function () {
     const host = server.address().address

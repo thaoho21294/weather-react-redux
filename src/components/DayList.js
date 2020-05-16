@@ -1,25 +1,26 @@
 import React, { useReducer, useEffect } from 'react';
 
-import { fetchWeatherEffect } from '../effects';
-import { toWeekday } from '../utils';
+import { fetchWeatherEffect } from '../commons/effects';
+import { toWeekday } from '../commons/utils';
 
-export default function DayList ({ location }) {
+export default function DayList ({ locationId }) {
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     days: [],
     loading: true,
     error: null,
-    country: '',
+    location: '',
   });
 
   useEffect(() => {
-    fetchWeatherEffect(setState, location.woeid);
-  }, [location]);
+    setState({ loading: true })
+    fetchWeatherEffect(setState, locationId);
+  }, [locationId]);
 
   return (
     <React.Fragment>
-    { state.country && <div className="text-info">Country: {state.country}</div> }
+    { state.location && <div className="text-info">Location: {state.location}</div> }
     <div className="days">
-      {(state.days || []).map((day) => {
+      {!state.loading && (state.days || []).map((day) => {
         return <div className="day" key={day.id}>
           <div className="dayName">{toWeekday(day.applicable_date)}</div>
           <div>{Math.round(day.min_temp)}</div>
