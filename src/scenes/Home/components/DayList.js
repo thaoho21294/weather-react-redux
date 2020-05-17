@@ -1,18 +1,17 @@
 import React, { useReducer, useEffect } from 'react';
 
-import { fetchWeatherEffect } from '../commons/effects';
-import { toWeekday } from '../commons/utils';
+import { fetchWeatherEffect } from '../effects';
+import Day from '../../../components/Day';
 
 export default function DayList ({ locationId }) {
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     days: [],
-    loading: true,
-    error: null,
     location: '',
+    loading: true,
+    error: null
   });
 
   useEffect(() => {
-    setState({ loading: true })
     fetchWeatherEffect(setState, locationId);
   }, [locationId]);
 
@@ -20,13 +19,7 @@ export default function DayList ({ locationId }) {
     <React.Fragment>
     { state.location && <div className="text-info">Location: {state.location}</div> }
     <div className="days">
-      {!state.loading && (state.days || []).map((day) => {
-        return <div className="day" key={day.id}>
-          <div className="dayName">{toWeekday(day.applicable_date)}</div>
-          <div>{Math.round(day.min_temp)}</div>
-          <div>{Math.round(day.max_temp)}</div>
-        </div>
-      })}
+      {!state.loading && (state.days || []).map((day) => { return <Day key={day.id} day={day} /> })}
       { state.error && <div className="text-danger">{state.error}</div> }
       { state.loading && <div className="text-info">loading...</div> }
     </div>

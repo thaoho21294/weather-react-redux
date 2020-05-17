@@ -7,6 +7,8 @@ weekday[4] = "Thursday";
 weekday[5] = "Friday";
 weekday[6] = "Saturday";
 
+export { weekday };
+
 export function toWeekday(date) {
   const d = new Date(date);
   return weekday[d.getDay()];

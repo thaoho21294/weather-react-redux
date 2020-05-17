@@ -1,10 +1,9 @@
 import React, { useReducer } from 'react';
 import { FormControl } from 'react-bootstrap';
 import Autocomplete from 'react-autocomplete';
-import { searchLocationEffect } from '../commons/effects';
+import { searchLocationEffect } from '../effects';
 
 export default function LocationSearchBar({ onSearch }) {
-
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     foundLocations: [],
     selectedLocationName: '',
@@ -16,7 +15,6 @@ export default function LocationSearchBar({ onSearch }) {
     const locationString = e.target.value;
     setState({ selectedLocationName: locationString });
     if(locationString !== '') {
-      setState({ loading: true });
       await searchLocationEffect(setState, locationString);
     }
   }

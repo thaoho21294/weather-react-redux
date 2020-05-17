@@ -1,4 +1,4 @@
-export const location_uri = `/location`;
+export const locationUri = `/location`;
 
 async function convertResponse(response) {
   const convertedResponse = await response.json();
@@ -6,11 +6,11 @@ async function convertResponse(response) {
 }
 
 export async function getWeather(woeid) {
-  return convertResponse(await fetch(`${location_uri}/${woeid}`));
+  return convertResponse(await fetch(`${locationUri}/${woeid}`));
   
 }
 
 export async function searchLocation(locationString) {
-  return convertResponse(await fetch(`${location_uri}/search/?query=${locationString}`));
+  return convertResponse(await fetch(`${locationUri}/search/?query=${locationString}`));
   
 }
