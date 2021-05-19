@@ -19,7 +19,10 @@ export default function DayList ({ locationId }) {
     <React.Fragment>
     { state.location && <div className="text-info">Location: {state.location}</div> }
     <div className="days">
-      {!state.loading && (state.days || []).map((day) => { return <Day key={day.id} day={day} /> })}
+      {!state.loading && (state.days || []).map((day) => {
+        const fullDay = { ...day, locationId }
+         return <Day key={day.id} day={fullDay} /> 
+        })}
       { state.error && <div className="text-danger">{state.error}</div> }
       { state.loading && <div className="text-info">loading...</div> }
     </div>
