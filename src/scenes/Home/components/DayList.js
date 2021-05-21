@@ -21,7 +21,7 @@ export default function DayList ({ locationId }) {
     <div className="days">
       {!state.loading && (state.days || []).map((day) => {
         const fullDay = { ...day, locationId }
-         return <Day key={day.id} day={fullDay} /> 
+         return <Day key={day.id} day={fullDay} />
         })}
       { state.error && <div className="text-danger">{state.error}</div> }
       { state.loading && <div className="text-info">loading...</div> }

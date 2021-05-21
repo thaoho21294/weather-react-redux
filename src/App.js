@@ -5,8 +5,7 @@ import Home from './scenes/Home/Home';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
+  Route
 } from "react-router-dom";
 import Detail from './scenes/Detail';
 
@@ -17,7 +16,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/detail" component={Detail} />
+          <Route path="/detail/:locationId/:date" component={Detail} />
         </Switch>
       </Router>
     </div>

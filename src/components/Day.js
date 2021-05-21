@@ -23,8 +23,10 @@ const convertDateToFlashDate = (dateString) => {
 
     return [year, month, day].join('/');
 }
-console.log(formatDate('2014-12-11'));
-export default Day = ({ day }) => {
+
+console.log(convertDateToFlashDate('2014-12-11'));
+
+export const Day = ({ day }) => {
   const { locationId, applicable_date } = day
   return (
     <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`} >
@@ -36,3 +38,5 @@ export default Day = ({ day }) => {
     </Link>
   )
 }
+
+export default Day;
