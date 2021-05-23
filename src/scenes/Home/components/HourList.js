@@ -15,7 +15,28 @@ export const HourList = (props) => {
         loading: true,
         error: null
     });
-    console.log(locationId, date)
+    
+
+
+
+    /**
+     * Convert date '2021-05-19' to '2021/5/19' <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`} >
+     * @param {String} dateString 
+     */
+
+    const convertDateToFlashDate = (dateString) => {
+        const d = new Date(dateString),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 1)
+            month = '0' + month;
+        if (day.length < 1)
+            day = '0' + day;
+
+        return [year, month, day].join('/');
+    }
 
     /* Convert dayname from date */
     /**
@@ -26,10 +47,9 @@ export const HourList = (props) => {
         const [date, options] = [new Date(dayNameString), { weekday: 'long' }];
         return new Intl.DateTimeFormat('en-Us', options).format(date);
     }
-    const {applicable_date } = props
-    console.log(convertDateToDayName('2021-05-23'))
-    console.log(convertDateToDayName(applicable_date))
-
+    const { applicable_date } = props
+    console.log(convertDateToDayName(convertDateToFlashDate(date)))
+    console.log(locationId, convertDateToDayName(convertDateToFlashDate(date)))
     useEffect(() => {
         fetchWeatherDateEffect(setState, 'dayName');
     }, []);

@@ -25,9 +25,9 @@ app.get('/location/:woeid', (req, res) => {
   });
 });
 
-app.get('/location/:woeid/:year/:month/:day', (req,res) => {
-    const { woeid, year, month, day } = req.params
-    fetch(`${base_url}/location/${woeid}/${year}/${month}/${day}`)
+app.get('/location/:woeid/:date', (req,res) => {
+    const { woeid, date } = req.params
+    fetch(`${base_url}/location/${woeid}/${date}`)
     .then(res => res.json())
     .then(data => {
         res.send({ data });
@@ -36,6 +36,18 @@ app.get('/location/:woeid/:year/:month/:day', (req,res) => {
         res.send(err);
     });
 });
+
+// app.get('/location/:woeid/:year/:month/:day', (req,res) => {
+//     const { woeid, year, month, day } = req.params
+//     fetch(`${base_url}/location/${woeid}/${year}/${month}/${day}`)
+//     .then(res => res.json())
+//     .then(data => {
+//         res.send({ data });
+//     })
+//     .catch(err => {
+//         res.send(err);
+//     });
+// });
 
 const server = app.listen(4000, function () {
     const host = server.address().address
