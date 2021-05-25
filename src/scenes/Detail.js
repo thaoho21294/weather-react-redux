@@ -1,5 +1,5 @@
 import React from 'react';
-import { HourList } from './Home/components/HourList';
+import { HourList } from './HourList';
 
 export const Detail = (props) => {
     const { match } = props
@@ -17,7 +17,7 @@ export const Detail = (props) => {
 
     return (
         <div>
-            <h3>Welcome to Detail Page</h3>
+            <h3>Welcome to Detail {} Page</h3>
             <HourList match={match} />
         </div>
     )

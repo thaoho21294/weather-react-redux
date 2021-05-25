@@ -11,23 +11,22 @@ import {
  */
 
 const convertDateToFlashDate = (dateString) => {
-    const d = new Date(dateString),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+  let d = new Date(dateString),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
 
-    if (month.length < 1)
-      month = '0' + month;
-    if (day.length < 1)
-      day = '0' + day;
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
 
-    return [year, month, day].join('/');
+  return [year, month, day].join('/');
 }
-
-console.log(convertDateToFlashDate('2014-12-11'));
 
 export const Day = ({ day }) => {
   const { locationId, applicable_date } = day
+  console.log((convertDateToFlashDate(applicable_date)));
   return (
     <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`} >
       <div className="day" key={day.id}>

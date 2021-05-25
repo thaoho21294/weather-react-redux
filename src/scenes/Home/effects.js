@@ -22,14 +22,10 @@ export async function searchLocationEffect(setState, locationString) {
   setState({ loading: false });
 }
 
-export async function fetchWeatherDateEffect(setState, day) {
+export async function fetchWeatherDateEffect(setState, woeid, date) {
   try {
     setState({ loading: true })
-    const woeid = '44418';
-    const year = '2021';
-    const month = '05';
-    const day = '20';
-    const response = await getWeatherDate(woeid, year, month, day)
+    const response = await getWeatherDate(woeid, date)
     setState({ hours: response });
   } catch (e) {
     setState({ error: e.message || 'Unexpected Error!!!' });

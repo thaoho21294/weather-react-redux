@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/detail/:locationId/:date" component={Detail} />
+          <Route path="/detail/:locationId/:year/:month/:day" component={Detail} />
         </Switch>
       </Router>
     </div>

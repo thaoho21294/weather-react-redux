@@ -1,24 +1,20 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { toWeekday } from '../../../commons/utils';
+import { toWeekday } from '../commons/utils';
 import Table from 'react-bootstrap/Table';
-import { fetchWeatherDateEffect } from '../effects';
+import { fetchWeatherDateEffect } from './Home/effects';
+import Hour from '../components/Hour';
 
 
 export const HourList = (props) => {
 
-    const { match: { params: { locationId, date } } } = props
-
+    const { match: { params: { locationId, year, month, day } } } = props
     const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
         hours: [],
         days: '',
         loading: true,
         error: null
     });
-    
-
-
-
     /**
      * Convert date '2021-05-19' to '2021/5/19' <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`} >
      * @param {String} dateString 
@@ -47,56 +43,42 @@ export const HourList = (props) => {
         const [date, options] = [new Date(dayNameString), { weekday: 'long' }];
         return new Intl.DateTimeFormat('en-Us', options).format(date);
     }
-    const { applicable_date } = props
-    console.log(convertDateToDayName(convertDateToFlashDate(date)))
-    console.log(locationId, convertDateToDayName(convertDateToFlashDate(date)))
+
     useEffect(() => {
-        fetchWeatherDateEffect(setState, 'dayName');
+        const date = year + month + day
+        fetchWeatherDateEffect(setState, locationId, date);
     }, []);
+
+    // console.log(
+    //     !state.loading && (state.hours || []).map((hour) => {
+    //         const fullDay = { ...hour, locationId, year, month, day }
+    //         return (<div key={hour.id} hour={fullDay}></div>)
+    //     })
+    // );  
 
     return (
         <React.Fragment>
-            { state.days && <div className="text-info">Day: {state.days}</div>}
+            <h3>{convertDateToDayName(convertDateToFlashDate(`${year}/${month}/${day}`))}</h3>
             <Table striped bordered hover>
+
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Hourly</th>
                         <th>Weather State Name</th>
-                        <th>DateTime</th>
                         <th>Min Temp</th>
                         <th>Max Temp</th>
                         <th>Humidity</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td>{date} </td>
-                        <td> {convertDateToDayName(date)}</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@twitter</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
+                        {!state.loading && (state.hours || []).map((data) => {
+                            const fullDay = { ...data, locationId, year, month, day }
+                            return (<Hour key={(data.created).slice(11,13)} data={fullDay} />)
+                            
+                        })}
                 </tbody>
             </Table>
-        </React.Fragment>
-
+        </React.Fragment >
     )
 }
 

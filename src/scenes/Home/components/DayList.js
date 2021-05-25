@@ -3,7 +3,7 @@ import React, { useReducer, useEffect } from 'react';
 import { fetchWeatherEffect } from '../effects';
 import Day from '../../../components/Day';
 
-export default function DayList ({ locationId }) {
+export default function DayList({ locationId }) {
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     days: [],
     location: '',
@@ -14,17 +14,22 @@ export default function DayList ({ locationId }) {
   useEffect(() => {
     fetchWeatherEffect(setState, locationId);
   }, [locationId]);
-
+  console.log(
+    !state.loading && (state.days || []).map((day) => {
+      const fullDay = { ...day, locationId }
+      return (<div key={day.id}></div>)
+    })
+  );
   return (
     <React.Fragment>
-    { state.location && <div className="text-info">Location: {state.location}</div> }
-    <div className="days">
-      {!state.loading && (state.days || []).map((day) => {
-        const fullDay = { ...day, locationId }
-         return <Day key={day.id} day={fullDay} />
+      { state.location && <div className="text-info">Location: {state.location}</div>}
+      <div className="days">
+        {!state.loading && (state.days || []).map((day) => {
+          const fullDay = { ...day, locationId }
+          return <Day key={day.id} day={fullDay} />
         })}
-      { state.error && <div className="text-danger">{state.error}</div> }
-      { state.loading && <div className="text-info">loading...</div> }
-    </div>
-  </React.Fragment>)
-} 
+        {state.error && <div className="text-danger">{state.error}</div>}
+        {state.loading && <div className="text-info">loading...</div>}
+      </div>
+    </React.Fragment>)
+}
