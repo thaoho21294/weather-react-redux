@@ -26,7 +26,7 @@ export async function fetchWeatherDateEffect(setState, woeid, date) {
   try {
     setState({ loading: true })
     const response = await getWeatherDate(woeid, date)
-    setState({ hours: response });
+    setState({ weatherList: response });
   } catch (e) {
     setState({ error: e.message || 'Unexpected Error!!!' });
   }

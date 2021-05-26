@@ -5,12 +5,11 @@ import Table from 'react-bootstrap/Table';
 import { fetchWeatherDateEffect } from './Home/effects';
 import Hour from '../components/Hour';
 
-
 export const HourList = (props) => {
 
     const { match: { params: { locationId, year, month, day } } } = props
     const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
-        hours: [],
+        weatherList: [],
         days: '',
         loading: true,
         error: null
@@ -34,6 +33,12 @@ export const HourList = (props) => {
         return [year, month, day].join('/');
     }
 
+    let hours = [...new Set(state.weatherList.map((weather) => new Date(weather.created).getHours()))]
+
+    hours.sort((a, b) => a - b)
+
+    const sortedWeatherList = hours.map((hour) => state.weatherList.find((weather) => new Date(weather.created).getHours() == hour))
+
     /* Convert dayname from date */
     /**
      * 
@@ -48,13 +53,6 @@ export const HourList = (props) => {
         const date = year + month + day
         fetchWeatherDateEffect(setState, locationId, date);
     }, []);
-
-    // console.log(
-    //     !state.loading && (state.hours || []).map((hour) => {
-    //         const fullDay = { ...hour, locationId, year, month, day }
-    //         return (<div key={hour.id} hour={fullDay}></div>)
-    //     })
-    // );  
 
     return (
         <React.Fragment>
@@ -71,9 +69,9 @@ export const HourList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                        {!state.loading && (state.hours || []).map((data) => {
-                            const fullDay = { ...data, locationId, year, month, day }
-                            return (<Hour key={(data.created).slice(11,13)} data={fullDay} />)
+                        {!state.loading && (sortedWeatherList || []).map((weather) => {
+                            const fullDay = { ...weather, locationId, year, month, day }
+                            return (<Hour data={fullDay} />)
                             
                         })}
                 </tbody>
