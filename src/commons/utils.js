@@ -13,3 +13,5 @@ export function toWeekday(date) {
   const d = new Date(date);
   return weekday[d.getDay()];
 }
+
+export const locationUri = `/location`;

@@ -7,7 +7,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Detail from './scenes/Detail';
+import WeatherHourlyList from './scenes/WeatherHourlyList';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/detail/:locationId/:year/:month/:day" component={Detail} />
+          <Route path="/detail/:locationId/:year/:month/:day" component={WeatherHourlyList} />
         </Switch>
       </Router>
     </div>

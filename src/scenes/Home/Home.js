@@ -7,7 +7,7 @@ import {
   BrowserRouter as Router,Switch,
   Route,
 } from "react-router-dom";
-import Detail from '../Detail';
+import WeatherHourlyList from '../WeatherHourlyList';
 
 
 export default function Home() {
@@ -29,7 +29,7 @@ export default function Home() {
     </section>
     <Router>
         <Switch>
-          <Route path="/detail" component={Detail} />
+          <Route path="/detail" component={WeatherHourlyList} />
         </Switch>
       </Router>
   </div>)

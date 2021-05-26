@@ -5,7 +5,7 @@ import Table from 'react-bootstrap/Table';
 import { fetchWeatherDateEffect } from './Home/effects';
 import Hour from '../components/Hour';
 
-export const HourList = (props) => {
+export const WeatherHourlyList = (props) => {
 
     const { match: { params: { locationId, year, month, day } } } = props
     const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
@@ -80,4 +80,4 @@ export const HourList = (props) => {
     )
 }
 
-export default HourList;
+export default WeatherHourlyList;
