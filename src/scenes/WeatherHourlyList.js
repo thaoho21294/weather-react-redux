@@ -40,7 +40,6 @@ export const WeatherHourlyList = (props) => {
     const date = year + month + day
     const { data, loading, error } = useFetchData(`${locationUri}/${locationId}/${date}`, [], [locationId, date])
 
-
     let hours = [...new Set(data.map((weather) => new Date(weather.created).getHours()))]
 
     hours.sort((a, b) => a - b)

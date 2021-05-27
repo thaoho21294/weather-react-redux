@@ -11,7 +11,7 @@ export default function DayList({ locationId }) {
     <React.Fragment>
       <div className="text-info">Location: {data.title}</div>
       <div className="days">
-        {data.consolidated_weather.map((day) => {
+        {!loading && data.consolidated_weather.map((day) => {
           const fullDay = { ...day, locationId }
           return <Day key={day.id} day={fullDay} />
         })}
@@ -20,3 +20,4 @@ export default function DayList({ locationId }) {
       </div>
     </React.Fragment>)
 }
+// const { data, loading, error } = useFetchData(`${locationUri}/search/?query=${locationString}`,{title: ''}, [])

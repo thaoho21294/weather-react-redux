@@ -9,6 +9,10 @@ export const useFetchData = (url, initialData = [], dependencies = []) => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setData((prevState) => ({
+                ...prevState,
+                loading: true,
+            }))
             try {
                 const response = await fetch(url)
                 const convertedResponse = await response.json()
@@ -17,11 +21,11 @@ export const useFetchData = (url, initialData = [], dependencies = []) => {
                     loading: false,
                     data: convertedResponse.data
                 }))
-            } catch (e) {
+            } catch (err) {
                 setData((prevState) => ({
                     ...prevState,
                     loading: false,
-                    error: e
+                    error: err
                 }))
             }
         }
