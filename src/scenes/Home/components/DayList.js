@@ -5,7 +5,7 @@ import Day from '../../../components/Day';
 import useFetchData from '../../../commons/useFetchData'
 
 export default function DayList({ locationId }) {
-  const { data, loading, error } = useFetchData( `${locationUri}/${locationId}`, { consolidated_weather: [], title: '' }, [locationId])
+  const { data, loading, error } = useFetchData(`${locationUri}/${locationId}`, { consolidated_weather: [], title: '' }, [locationId])
 
   return (
     <React.Fragment>
@@ -20,4 +20,3 @@ export default function DayList({ locationId }) {
       </div>
     </React.Fragment>)
 }
-// const { data, loading, error } = useFetchData(`${locationUri}/search/?query=${locationString}`,{title: ''}, [])

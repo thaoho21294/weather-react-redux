@@ -4,7 +4,6 @@ import Autocomplete from 'react-autocomplete';
 import { locationUri } from '../../../commons/utils'
 
 export default function LocationSearchBar({ onSearch }) {
-
   const [selectedLocationName, setSelectedLocationName] = useState('')
   const [state, setState] = useState({
     loading: true,
@@ -16,7 +15,6 @@ export default function LocationSearchBar({ onSearch }) {
     const locationString = e.target.value;
     setSelectedLocationName(locationString);
     if (locationString !== '') {
-      // await searchLocationEffect(setState, locationString);
       const response = await fetch(`${locationUri}/search/?query=${locationString}`)
       response.json().then((response) => {
         setState({

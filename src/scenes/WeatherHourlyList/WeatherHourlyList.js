@@ -1,37 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
-import Hour from '../components/Hour';
-import useFetchData from '../commons/useFetchData';
-import { locationUri } from '../commons/utils';
+import WeatherHourly from './WeatherHourly';
+import useFetchData from '../../commons/useFetchData';
+import { locationUri } from '../../commons/utils';
 
-/* Convert dayname from date */
 /**
- * 
- * @param {String} dayNameString 
+ * Convert date to weekday
+ * @param {String} dateString ex:2021/05/27
+ * @returns {String} weekday
  */
-const convertDateToDayName = (dayNameString) => {
-    const [date, options] = [new Date(dayNameString), { weekday: 'long' }];
-    return new Intl.DateTimeFormat('en-Us', options).format(date);
-}
-
-/**
-     * Convert date '2021-05-19' to '2021/5/19' <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`} >
-     * @param {String} dateString 
-     */
-
-const convertDateToFlashDate = (dateString) => {
-    const d = new Date(dateString),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 1)
-        month = '0' + month;
-    if (day.length < 1)
-        day = '0' + day;
-
-    return [year, month, day].join('/');
+const convertDateToDayName = (dateString) => {
+    const date = new Date(dateString)
+    return new Intl.DateTimeFormat('en-Us', { weekday: 'long' }).format(date)
 }
 
 export const WeatherHourlyList = (props) => {
@@ -48,7 +29,7 @@ export const WeatherHourlyList = (props) => {
 
     return (
         <React.Fragment>
-            <h3>{convertDateToDayName(convertDateToFlashDate(`${year}/${month}/${day}`))}</h3>
+            <h3>{convertDateToDayName(`${year}/${month}/${day}`)}</h3>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -61,8 +42,7 @@ export const WeatherHourlyList = (props) => {
                 </thead>
                 <tbody>
                     {sortedWeatherList.map((weather) => {
-                        const fullDay = { ...weather, locationId, year, month, day }
-                        return (<Hour data={fullDay} />)
+                        return <WeatherHourly {...weather} />
                     })}
                 </tbody>
             </Table>

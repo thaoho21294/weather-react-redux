@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-
 import LocationSearchBar from './components/LocationSearchBar';
 import DayList from './components/DayList';
 import { defaultLocation } from '../../__mock__/mockData';
-import {
-  BrowserRouter as Router,Switch,
-  Route,
-} from "react-router-dom";
-import WeatherHourlyList from '../WeatherHourlyList';
 
 
 export default function Home() {
@@ -27,10 +21,5 @@ export default function Home() {
     <section>
       <DayList locationId={locationId}></DayList>
     </section>
-    <Router>
-        <Switch>
-          <Route path="/detail" component={WeatherHourlyList} />
-        </Switch>
-      </Router>
   </div>)
 }

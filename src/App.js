@@ -7,7 +7,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import WeatherHourlyList from './scenes/WeatherHourlyList';
+import WeatherHourlyList from './scenes/WeatherHourlyList/WeatherHourlyList';
 
 
 function App() {
