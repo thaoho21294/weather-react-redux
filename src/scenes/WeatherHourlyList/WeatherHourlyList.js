@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import WeatherHourly from './WeatherHourly';
@@ -17,15 +17,19 @@ const convertDateToDayName = (dateString) => {
 
 export const WeatherHourlyList = (props) => {
     const { match: { params: { locationId, year, month, day } } } = props
-
     const date = year + month + day
-    const { data, loading, error } = useFetchData(`${locationUri}/${locationId}/${date}`, [], [locationId, date])
-
-    let hours = [...new Set(data.map((weather) => new Date(weather.created).getHours()))]
-
-    hours.sort((a, b) => a - b)
-
-    const sortedWeatherList = hours.map((hour) => data.find((weather) => new Date(weather.created).getHours() == hour))
+    const { data: weatherList, loading, error } = useFetchData(`${locationUri}/${locationId}/${date}`, [], [locationId, date])
+    
+    const sortedWeatherList = useMemo(() => {
+        const hours = [...new Set(weatherList.map((weather) => new Date(weather.created).getHours()))]
+        hours.sort((a, b) => a - b)
+        // return hours.map((hour) => {
+        //     const foundWeather = weatherList.find((weather) => new Date(weather.created).getHours() == hour)
+        //     foundWeather.ihourly = hour
+        //     return foundWeather
+        // })
+        return hours.map((hour) => ({...weatherList.find((weather) => new Date(weather.created).getHours() == hour), hour }))
+    }, [weatherList])
 
     return (
         <React.Fragment>

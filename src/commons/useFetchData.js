@@ -1,36 +1,26 @@
 import { useState, useEffect } from 'react'
 
 export const useFetchData = (url, initialData = [], dependencies = []) => {
-    const [data, setData] = useState({
-        loading: true,
-        error: null,
-        data: initialData
-    })
+    const [data, setData] = useState(initialData)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
-            setData((prevState) => ({
-                ...prevState,
-                loading: true,
-            }))
+           setLoading(true)
             try {
                 const response = await fetch(url)
                 const convertedResponse = await response.json()
-                setData((prevState) => ({
-                    ...prevState,
-                    loading: false,
-                    data: convertedResponse.data
-                }))
+                setData(convertedResponse.data)
+                setLoading(false)
             } catch (err) {
-                setData((prevState) => ({
-                    ...prevState,
-                    loading: false,
-                    error: err
-                }))
+                setError(err)
             }
         }
         fetchData()
+
     }, dependencies)
-    return data
+
+    return { data, loading, error }
 }
 export default useFetchData

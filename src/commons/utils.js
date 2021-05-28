@@ -15,3 +15,4 @@ export function toWeekday(date) {
 }
 
 export const locationUri = `/location`;
+
