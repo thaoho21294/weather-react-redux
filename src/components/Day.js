@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router, Switch, Link, Route,
 } from "react-router-dom";
 
-
+// TODO: Move this function to utils
 /**
  * Convert date '2021-05-19' to '2021/5/19' <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`} >
  * @param {String} dateString 

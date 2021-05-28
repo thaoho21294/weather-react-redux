@@ -25,6 +25,16 @@ app.get('/location/:woeid', (req, res) => {
   });
 });
 
+//api /sources mock data
+// return [
+    //   {
+    //     "title":"BBC",
+    //     "slug":"bbc",
+    //     "url":"http://www.bbc.co.uk/weather/",
+    //     "crawl_rate":360
+    //  }
+    // ...]
+
 // app.get('/location/:woeid/:date', (req,res) => {
 //     const { woeid, date } = req.params
 //     fetch(`${base_url}/location/${woeid}/${date}`)
