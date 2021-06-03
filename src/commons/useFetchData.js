@@ -18,9 +18,8 @@ export const useFetchData = (url, initialData = [], dependencies = []) => {
             }
         }
         fetchData()
-
     }, dependencies)
 
-    return { data, loading, error }
+    return { setData ,data, loading, error }
 }
 export default useFetchData
