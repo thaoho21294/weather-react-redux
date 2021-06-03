@@ -40,7 +40,7 @@ export const WeatherHourlyList = (props) => {
     const handleSearch = (text) => {
         const filterWeatherList = sortedWeatherList.filter((temp) => (
         temp.weather_state_name.toLowerCase().includes(text)
-        || temp.humidity.toString().includes(text)
+        || (temp.humidity.toString()+'%').includes(text)
         ))
         
         setFilteredWeatherList(filterWeatherList)
