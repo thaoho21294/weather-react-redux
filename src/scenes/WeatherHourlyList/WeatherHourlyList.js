@@ -1,48 +1,46 @@
-import React, { useMemo, useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Table from "react-bootstrap/Table";
-import WeatherHourly from "./WeatherHourly";
-import useFetchData from "../../commons/useFetchData";
-import { locationUri } from "../../commons/utils";
-import WeatherStateSearchBar, {
-  searchStateName,
-} from "../Home/components/WeatherStateSearchBar";
+/* eslint-disable react/prop-types */
+import React, { useMemo, useState, useEffect } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Table from 'react-bootstrap/Table'
+import WeatherHourly from './WeatherHourly'
+import useFetchData from '../../commons/useFetchData'
+import { locationUri } from '../../commons/utils'
+import WeatherStateSearchBar from '../Home/components/WeatherStateSearchBar'
 /**
  * Convert date to weekday
  * @param {String} dateString ex:2021/05/27
  * @returns {String} weekday
  */
 const convertDateToDayName = (dateString) => {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat("en-Us", { weekday: "long" }).format(date);
-};
+  const date = new Date(dateString)
+  return new Intl.DateTimeFormat('en-Us', { weekday: 'long' }).format(date)
+}
 
 export const WeatherHourlyList = (props) => {
   const {
     match: {
-      params: { locationId, year, month, day },
-    },
-  } = props;
-  const date = year + month + day;
+      params: { locationId, year, month, day }
+    }
+  } = props
+  const date = year + month + day
   const {
-    setData,
     data: weatherList,
     loading,
-    error,
+    error
   } = useFetchData(
     `${locationUri}/${locationId}/${date}`,
     [],
     [locationId, date]
-  );
-  const [filteredWeatherList, setFilteredWeatherList] = useState([]);
+  )
+  const [filteredWeatherList, setFilteredWeatherList] = useState([])
 
   const sortedWeatherList = useMemo(() => {
     const hours = [
       ...new Set(
         weatherList.map((weather) => new Date(weather.created).getHours())
-      ),
-    ];
-    hours.sort((a, b) => a - b);
+      )
+    ]
+    hours.sort((a, b) => a - b)
     // return hours.map((hour) => {
     //     const foundWeather = weatherList.find((weather) => new Date(weather.created).getHours() == hour)
     //     foundWeather.ihourly = hour
@@ -52,24 +50,24 @@ export const WeatherHourlyList = (props) => {
       ...weatherList.find(
         (weather) => new Date(weather.created).getHours() === hour
       ),
-      hour,
-    }));
-  }, [weatherList]);
+      hour
+    }))
+  }, [weatherList])
 
   useEffect(() => {
-    setFilteredWeatherList(sortedWeatherList);
-  }, [sortedWeatherList]);
+    setFilteredWeatherList(sortedWeatherList)
+  }, [sortedWeatherList])
 
   const handleSearch = (text) => {
     const filterWeatherList = sortedWeatherList.filter(
       (temp) =>
         temp.weather_state_name.toLowerCase().includes(text) ||
-        (temp.humidity.toString() + "%").includes(text)
-    );
+        (temp.humidity.toString() + '%').includes(text)
+    )
 
-    setFilteredWeatherList(filterWeatherList);
-    console.log(filterWeatherList);
-  };
+    setFilteredWeatherList(filterWeatherList)
+    console.log(filterWeatherList)
+  }
   return (
     <React.Fragment>
       <WeatherStateSearchBar handleSearch={handleSearch} />
@@ -86,13 +84,14 @@ export const WeatherHourlyList = (props) => {
         </thead>
         <tbody>
           {filteredWeatherList.map((weather) => {
-            return <WeatherHourly {...weather} />;
+            // eslint-disable-next-line react/jsx-key
+            return <WeatherHourly {...weather} />
           })}
         </tbody>
       </Table>
       {error && <div className="text-danger">{error}</div>}
       {loading && <div className="text-info">loading...</div>}
     </React.Fragment>
-  );
-};
-export default WeatherHourlyList;
+  )
+}
+export default WeatherHourlyList
