@@ -17,7 +17,7 @@ const convertDateToDayName = (dateString) => {
   return new Intl.DateTimeFormat("en-Us", { weekday: "long" }).format(date);
 };
 
-export default  WeatherHourlyList = (props) => {
+export const WeatherHourlyList = (props) => {
   const {
     match: {
       params: { locationId, year, month, day },
@@ -95,3 +95,4 @@ export default  WeatherHourlyList = (props) => {
     </React.Fragment>
   );
 };
+export default WeatherHourlyList;
