@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable camelcase */
 import React from 'react'
 import { toWeekday } from '../commons/utils'
-import { BrowserRouter as Router, Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // TODO: Move this function to utils
 /**
@@ -12,21 +14,21 @@ const convertDateToFlashDate = (dateString) => {
   const d = new Date(dateString)
   let month = '' + (d.getMonth() + 1)
   let day = '' + d.getDate()
-  const  year = d.getFullYear()
+  const year = d.getFullYear()
 
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
+  if (month.length < 2) month = '0' + month
+  if (day.length < 2) day = '0' + day
 
   return [year, month, day].join('/')
 }
 
+// eslint-disable-next-line react/prop-types
 export const Day = ({ day }) => {
+  // eslint-disable-next-line react/prop-types
   const { locationId, applicable_date } = day
   console.log(convertDateToFlashDate(applicable_date))
   return (
-    <Link
-      to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`}
-    >
+    <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`}>
       <div className="day" key={day.id}>
         <div className="dayName">{toWeekday(day.applicable_date)}</div>
         <div className="min-temp">{Math.round(day.min_temp)}</div>

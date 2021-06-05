@@ -17,41 +17,15 @@ const convertDateToDayName = (dateString) => {
 }
 
 export const WeatherHourlyList = (props) => {
-  const {
-    match: {
-      params: { locationId, year, month, day }
-    }
-  } = props
+  const { match: { params: { locationId, year, month, day } } } = props
   const date = year + month + day
-  const {
-    data: weatherList,
-    loading,
-    error
-  } = useFetchData(
-    `${locationUri}/${locationId}/${date}`,
-    [],
-    [locationId, date]
-  )
+  const { data: weatherList, loading, error } = useFetchData(`${locationUri}/${locationId}/${date}`, [], [locationId, date])
   const [filteredWeatherList, setFilteredWeatherList] = useState([])
 
   const sortedWeatherList = useMemo(() => {
-    const hours = [
-      ...new Set(
-        weatherList.map((weather) => new Date(weather.created).getHours())
-      )
-    ]
+    const hours = [...new Set(weatherList.map((weather) => new Date(weather.created).getHours()))]
     hours.sort((a, b) => a - b)
-    // return hours.map((hour) => {
-    //     const foundWeather = weatherList.find((weather) => new Date(weather.created).getHours() == hour)
-    //     foundWeather.ihourly = hour
-    //     return foundWeather
-    // })
-    return hours.map((hour) => ({
-      ...weatherList.find(
-        (weather) => new Date(weather.created).getHours() === hour
-      ),
-      hour
-    }))
+    return hours.map((hour) => ({ ...weatherList.find((weather) => new Date(weather.created).getHours() === hour), hour }))
   }, [weatherList])
 
   useEffect(() => {
@@ -59,14 +33,9 @@ export const WeatherHourlyList = (props) => {
   }, [sortedWeatherList])
 
   const handleSearch = (text) => {
-    const filterWeatherList = sortedWeatherList.filter(
-      (temp) =>
-        temp.weather_state_name.toLowerCase().includes(text) ||
-        (temp.humidity.toString() + '%').includes(text)
-    )
-
+    const filterWeatherList = sortedWeatherList.filter((temp) =>
+      temp.weather_state_name.toLowerCase().includes(text) || (temp.humidity.toString() + '%').includes(text))
     setFilteredWeatherList(filterWeatherList)
-    console.log(filterWeatherList)
   }
   return (
     <React.Fragment>

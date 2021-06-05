@@ -11,14 +11,5 @@ export default function WeatherStateSearchBar (props) {
     console.log('aaa', e.target.value)
   }
 
-  return (
-    <FormControl
-      name="search"
-      type="text"
-      placeholder="Type weather state name ..."
-      className="mr-sm-2"
-      value={text}
-      onChange={onChange}
-    />
-  )
+  return <FormControl name="search" type="text" placeholder="Type weather state name ..." className="mr-sm-2" value={text} onChange={onChange}/>
 }

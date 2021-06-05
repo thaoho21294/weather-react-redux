@@ -14,4 +14,4 @@ export function toWeekday (date) {
   return weekday[d.getDay()]
 }
 
-export const locationUri = `/location`
+export const locationUri = '/location'

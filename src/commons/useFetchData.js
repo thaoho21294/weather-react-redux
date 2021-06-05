@@ -10,9 +10,9 @@ export const useFetchData = (url, initialData = [], dependencies = []) => {
       setLoading(true)
       try {
         const response = await fetch(url)
-        const convertedResponse = await response.json();
+        const convertedResponse = await response.json()
         setData(convertedResponse.data)
-        setLoading(false);
+        setLoading(false)
       } catch (err) {
         setError(err)
       }

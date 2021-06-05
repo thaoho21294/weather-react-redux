@@ -16,25 +16,20 @@ export default function LocationSearchBar ({ onSearch }) {
     const locationString = e.target.value
     setSelectedLocationName(locationString)
     if (locationString !== '') {
-      const response = await fetch(
-        `${locationUri}/search/?query=${locationString}`
-      )
-      response
-        .json()
-        .then((response) => {
-          setState({
-            loading: false,
-            error: null,
-            foundLocations: response.data
-          })
+      const response = await fetch(`${locationUri}/search/?query=${locationString}`)
+      response.json().then((response) => {
+        setState({
+          loading: false,
+          error: null,
+          foundLocations: response.data
         })
-        .catch((e) => {
-          setState({
-            loading: false,
-            error: e,
-            foundLocations: []
-          })
+      }).catch((e) => {
+        setState({
+          loading: false,
+          error: e,
+          foundLocations: []
         })
+      })
     }
   }
 
@@ -54,23 +49,10 @@ export default function LocationSearchBar ({ onSearch }) {
         items={state.foundLocations}
         getItemValue={(item) => item.title}
         renderInput={(props) => {
-          return (
-            <FormControl
-              name="search"
-              type="text"
-              placeholder="Type location..."
-              className="mr-sm-2"
-              {...props}
-            />
-          )
+          return <FormControl name="search" type="text" placeholder="Type location..." className="mr-sm-2" {...props}/>
         }}
         renderItem={(item, highlighted) => (
-          <div
-            key={item.id}
-            style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
-          >
-            {item.title}
-          </div>
+          <div key={item.id} style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}>{item.title}</div>
         )}
         value={selectedLocationName}
         onChange={onChange}

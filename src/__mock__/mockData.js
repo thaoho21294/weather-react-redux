@@ -398,9 +398,9 @@ export const locations = [
   }
 ]
 
-export const defaultLocation =   {
+export const defaultLocation = {
   title: 'Ho Chi Minh City',
   location_type: 'City',
   woeid: 1252431,
   latt_long: '10.759180,106.662498'
-};
+}
