@@ -10,7 +10,6 @@ import { locations } from '../../../../__mock__/mockData'
  * I didn't find the solution
  * So it should be a idea of the unit test case for this component
  */
-// eslint-disable-next-line no-undef
 test('should display the location list when user input something', async () => {
   const typingValue = 'Ho'
   fetch.mock(`${locationUri}/search/?query=${typingValue}`, {
@@ -19,7 +18,6 @@ test('should display the location list when user input something', async () => {
   })
 
   const { getByText, getByPlaceholderText } = render(
-    // eslint-disable-next-line no-undef
     <LocationSearchBar onSearch={jest.fn()} />
   )
   fireEvent.change(getByPlaceholderText(/Type location/i), {
@@ -28,7 +26,6 @@ test('should display the location list when user input something', async () => {
 
   await waitForElement(() => {
     for (const location of locations) {
-      // eslint-disable-next-line no-undef
       expect(getByText(location.title)).toBeInTheDocument()
     }
   })
