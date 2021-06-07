@@ -2,8 +2,12 @@ import React from 'react'
 import Day from '../../../components/Day'
 import useFetchData from '../../../commons/useFetchData'
 import { locationUri } from '../../../commons/utils'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
+DayList.propTypes = {
+  locationId: PropTypes.string
+}
+
 export default function DayList ({ locationId }) {
   const { data, loading, error } = useFetchData(`${locationUri}/${locationId}`, { consolidated_weather: [], title: '' }, [locationId])
 

@@ -1,17 +1,22 @@
-/* eslint-disable camelcase */
 import React from 'react'
+import PropTypes from 'prop-types'
 
+WeatherHourly.propTypes = {
+  hour: PropTypes.string,
+  id: PropTypes.string,
+  weather_state_name: PropTypes.string,
+  min_temp: PropTypes.number,
+  max_temp: PropTypes.string,
+  humidity: PropTypes.string
+}
 function WeatherHourly (props) {
-  // eslint-disable-next-line react/prop-types
-  // eslint-disable-next-line camelcase
-  // eslint-disable-next-line react/prop-types
-  const { hour, id, weather_state_name, min_temp, max_temp, humidity } = props
+  const { hour, id, weather_state_name: weatherStateName, min_temp: minTemp, max_temp: maxTemp, humidity } = props
   return (
     <tr key={id}>
       <th>{hour}h</th>
-      <th>{weather_state_name}</th>
-      <th>{Math.round(min_temp)} °C</th>
-      <th>{Math.round(max_temp)} °C</th>
+      <th>{weatherStateName}</th>
+      <th>{Math.round(minTemp)} °C</th>
+      <th>{Math.round(maxTemp)} °C</th>
       <th>{Math.round(humidity)}%</th>
     </tr>
   )

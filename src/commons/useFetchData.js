@@ -13,6 +13,7 @@ export const useFetchData = (url, initialData = [], dependencies = []) => {
         const convertedResponse = await response.json()
         setData(convertedResponse.data)
         setLoading(false)
+        console.log(data)
       } catch (err) {
         setError(err)
       }

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useMemo, useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Table from 'react-bootstrap/Table'
@@ -6,6 +5,7 @@ import WeatherHourly from './WeatherHourly'
 import useFetchData from '../../commons/useFetchData'
 import { locationUri } from '../../commons/utils'
 import WeatherStateSearchBar from '../Home/components/WeatherStateSearchBar'
+import PropTypes from 'prop-types'
 /**
  * Convert date to weekday
  * @param {String} dateString ex:2021/05/27
@@ -16,7 +16,15 @@ const convertDateToDayName = (dateString) => {
   return new Intl.DateTimeFormat('en-Us', { weekday: 'long' }).format(date)
 }
 
-export const WeatherHourlyList = (props) => {
+WeatherHourlyList.propTypes = {
+  match: PropTypes.string,
+  locationId: PropTypes.string,
+  year: PropTypes.string,
+  month: PropTypes.string,
+  day: PropTypes.string
+}
+
+function WeatherHourlyList (props) {
   const { match: { params: { locationId, year, month, day } } } = props
   const date = year + month + day
   const { data: weatherList, loading, error } = useFetchData(`${locationUri}/${locationId}/${date}`, [], [locationId, date])
@@ -53,8 +61,7 @@ export const WeatherHourlyList = (props) => {
         </thead>
         <tbody>
           {filteredWeatherList.map((weather) => {
-            // eslint-disable-next-line react/jsx-key
-            return <WeatherHourly {...weather} />
+            return <WeatherHourly key={weather.hour}{...weather}/>
           })}
         </tbody>
       </Table>
