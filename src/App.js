@@ -1,8 +1,8 @@
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './scenes/Home/Home'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import WeatherHourlyList from './scenes/WeatherHourlyList/WeatherHourlyList'
 
 function App () {

@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { FormControl } from 'react-bootstrap'
 import Autocomplete from 'react-autocomplete'
 import { locationUri } from '../../../commons/utils'
+import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
-export default function LocationSearchBar ({ onSearch }) {
+const LocationSearchBar = ({ onSearch }) => {
   const [selectedLocationName, setSelectedLocationName] = useState('')
   const [state, setState] = useState({
     loading: true,
@@ -35,8 +35,6 @@ export default function LocationSearchBar ({ onSearch }) {
 
   function onSelect (title) {
     setSelectedLocationName(title)
-    // the AutoComplete doesn't export any function to get item properties that don't display
-    // so we need to find item by displayed value
     const selectedLocation = state.foundLocations.find((location) => {
       return location.title === title
     })
@@ -63,3 +61,9 @@ export default function LocationSearchBar ({ onSearch }) {
     </React.Fragment>
   )
 }
+
+LocationSearchBar.propTypes = {
+  onSearch: PropTypes.string
+}
+
+export default LocationSearchBar

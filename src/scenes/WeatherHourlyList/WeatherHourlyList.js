@@ -16,15 +16,7 @@ const convertDateToDayName = (dateString) => {
   return new Intl.DateTimeFormat('en-Us', { weekday: 'long' }).format(date)
 }
 
-WeatherHourlyList.propTypes = {
-  match: PropTypes.string,
-  locationId: PropTypes.string,
-  year: PropTypes.string,
-  month: PropTypes.string,
-  day: PropTypes.string
-}
-
-function WeatherHourlyList (props) {
+const WeatherHourlyList = (props) => {
   const { match: { params: { locationId, year, month, day } } } = props
   const date = year + month + day
   const { data: weatherList, loading, error } = useFetchData(`${locationUri}/${locationId}/${date}`, [], [locationId, date])
@@ -61,7 +53,7 @@ function WeatherHourlyList (props) {
         </thead>
         <tbody>
           {filteredWeatherList.map((weather) => {
-            return <WeatherHourly key={weather.hour}{...weather}/>
+            return <WeatherHourly key={weather.hour} {...weather}/>
           })}
         </tbody>
       </Table>
@@ -70,4 +62,13 @@ function WeatherHourlyList (props) {
     </React.Fragment>
   )
 }
+
+WeatherHourlyList.propTypes = {
+  match: PropTypes.string,
+  locationId: PropTypes.string,
+  year: PropTypes.string,
+  month: PropTypes.string,
+  day: PropTypes.string
+}
+
 export default WeatherHourlyList

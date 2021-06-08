@@ -1,17 +1,8 @@
 import React from 'react'
-import { toWeekday } from '../commons/utils'
 import { Link } from 'react-router-dom'
+import { toWeekday } from '../commons/utils'
 import PropTypes from 'prop-types'
 
-Day.propTypes = {
-  day: PropTypes.string,
-  locationId: PropTypes.string,
-  applicable_date: PropTypes.dateString,
-  id: PropTypes.string,
-  min_temp: PropTypes.string,
-  max_temp: PropTypes.string
-}
-// TODO: Move this function to utils
 /**
  * Convert date '2021-05-19' to '2021/5/19'
  * @param {String} dateString
@@ -29,7 +20,7 @@ const convertDateToFlashDate = (dateString) => {
   return [year, month, day].join('/')
 }
 
-function Day ({ day }) {
+const Day = ({ day }) => {
   const { locationId } = day
   return (
     <Link to={`/detail/${locationId}/${convertDateToFlashDate((day.applicable_date))}`}>
@@ -40,6 +31,16 @@ function Day ({ day }) {
       </div>
     </Link>
   )
+}
+
+Day.propTypes = {
+  day: PropTypes.shape({
+    locationId: PropTypes.string,
+    applicable_date: PropTypes.string,
+    id: PropTypes.number,
+    min_temp: PropTypes.number,
+    max_temp: PropTypes.number
+  })
 }
 
 export default Day
