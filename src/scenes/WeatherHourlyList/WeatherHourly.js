@@ -1,16 +1,26 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-function WeatherHourly (props) {
-    const { hour, id, weather_state_name, min_temp, max_temp, humidity } = props
-    return (
-        <tr key={(((id)))}>
-            <th>{hour}h</th>
-            <th>{weather_state_name}</th>
-            <th>{Math.round(min_temp)} °C</th>
-            <th>{Math.round(max_temp)} °C</th>
-            <th>{Math.round(humidity)}%</th>
-        </tr>
-    )
+const WeatherHourly = (props) => {
+  const { hour, id, weather_state_name: weatherStateName, min_temp: minTemp, max_temp: maxTemp, humidity } = props
+  return (
+    <tr key={id}>
+      <th>{hour}h</th>
+      <th>{weatherStateName}</th>
+      <th>{Math.round(minTemp)} °C</th>
+      <th>{Math.round(maxTemp)} °C</th>
+      <th>{Math.round(humidity)}%</th>
+    </tr>
+  )
 }
 
-export default WeatherHourly;
+WeatherHourly.propTypes = {
+  hour: PropTypes.string,
+  id: PropTypes.number,
+  weather_state_name: PropTypes.string,
+  min_temp: PropTypes.number,
+  max_temp: PropTypes.number,
+  humidity: PropTypes.number
+}
+
+export default WeatherHourly

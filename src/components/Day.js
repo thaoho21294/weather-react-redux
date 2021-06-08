@@ -1,34 +1,29 @@
-import React from 'react';
-import { toWeekday } from '../commons/utils';
-import {
-  BrowserRouter as Router, Switch, Link, Route,
-} from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { toWeekday } from '../commons/utils'
+import PropTypes from 'prop-types'
 
-// TODO: Move this function to utils
 /**
- * Convert date '2021-05-19' to '2021/5/19' <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`} >
- * @param {String} dateString 
+ * Convert date '2021-05-19' to '2021/5/19'
+ * @param {String} dateString
  */
 
 const convertDateToFlashDate = (dateString) => {
-  let d = new Date(dateString),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
+  const d = new Date(dateString)
+  let month = '' + (d.getMonth() + 1)
+  let day = '' + d.getDate()
+  const year = d.getFullYear()
 
-  if (month.length < 2)
-    month = '0' + month;
-  if (day.length < 2)
-    day = '0' + day;
+  if (month.length < 2) month = '0' + month
+  if (day.length < 2) day = '0' + day
 
-  return [year, month, day].join('/');
+  return [year, month, day].join('/')
 }
 
-export const Day = ({ day }) => {
-  const { locationId, applicable_date } = day
-  console.log((convertDateToFlashDate(applicable_date)));
+const Day = ({ day }) => {
+  const { locationId } = day
   return (
-    <Link to={`/detail/${locationId}/${convertDateToFlashDate(applicable_date)}`} >
+    <Link to={`/detail/${locationId}/${convertDateToFlashDate((day.applicable_date))}`}>
       <div className="day" key={day.id}>
         <div className="dayName">{toWeekday(day.applicable_date)}</div>
         <div className="min-temp">{Math.round(day.min_temp)}</div>
@@ -38,4 +33,14 @@ export const Day = ({ day }) => {
   )
 }
 
-export default Day;
+Day.propTypes = {
+  day: PropTypes.shape({
+    locationId: PropTypes.string,
+    applicable_date: PropTypes.string,
+    id: PropTypes.number,
+    min_temp: PropTypes.number,
+    max_temp: PropTypes.number
+  })
+}
+
+export default Day

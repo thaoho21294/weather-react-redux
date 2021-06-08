@@ -1,10 +1,10 @@
-import React from 'react';
-import { locationUri } from '../../../commons/utils'
-
-import Day from '../../../components/Day';
+import React from 'react'
+import Day from '../../../components/Day'
 import useFetchData from '../../../commons/useFetchData'
+import { locationUri } from '../../../commons/utils'
+import PropTypes from 'prop-types'
 
-export default function DayList({ locationId }) {
+const DayList = ({ locationId }) => {
   const { data, loading, error } = useFetchData(`${locationUri}/${locationId}`, { consolidated_weather: [], title: '' }, [locationId])
 
   return (
@@ -15,8 +15,15 @@ export default function DayList({ locationId }) {
           const fullDay = { ...day, locationId }
           return <Day key={day.id} day={fullDay} />
         })}
-        {error && <div className="text-danger">{error}</div>}
+        {error && <div className="text-danger"> {error} </div>}
         {loading && <div className="text-info">loading...</div>}
       </div>
-    </React.Fragment>)
+    </React.Fragment>
+  )
 }
+
+DayList.propTypes = {
+  locationId: PropTypes.string
+}
+
+export default DayList

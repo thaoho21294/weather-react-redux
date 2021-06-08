@@ -1,12 +1,12 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import Home from '../Home';
+import React from 'react'
+import { render } from '@testing-library/react'
+import Home from '../Home'
 
 test('renders learn react link', () => {
-  const { getByText } = render(<Home />);
-  const linkElement = getByText(/Today Weather/i);
-  expect(linkElement).toBeInTheDocument();
-});
+  const { getByText } = render(<Home />)
+  const linkElement = getByText(/Today Weather/i)
+  expect(linkElement).toBeInTheDocument()
+})
 
 /**
  * This is the test case idea
