@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 const LocationSearchBar = ({ onSearch }) => {
   const [selectedLocationName, setSelectedLocationName] = useState('')
   const [state, setState] = useState({
-    loading: true,
+    loading: false,
     error: null,
     foundLocations: []
   })
@@ -19,13 +19,13 @@ const LocationSearchBar = ({ onSearch }) => {
       const response = await fetch(`${locationUri}/search/?query=${locationString}`)
       response.json().then((response) => {
         setState({
-          loading: false,
+          loading: true,
           error: null,
           foundLocations: response.data
         })
       }).catch((e) => {
         setState({
-          loading: false,
+          loading: true,
           error: e,
           foundLocations: []
         })
@@ -37,6 +37,11 @@ const LocationSearchBar = ({ onSearch }) => {
     setSelectedLocationName(title)
     const selectedLocation = state.foundLocations.find((location) => {
       return location.title === title
+    })
+    setState({
+      loading: false,
+      error: null,
+      foundLocations: []
     })
     onSearch(selectedLocation.woeid)
   }
