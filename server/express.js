@@ -20,7 +20,7 @@ const users = [
   }
 ]
 
-app.get('/users', (req, res) => {
+app.get('/login', (req, res) => {
   try {
     const foundUser = users.find((user) => user.username === req.query.username && user.password === req.query.password)
     res.send(foundUser)
