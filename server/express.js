@@ -1,14 +1,6 @@
 const express = require('express')
-// const formData = require('express-form-data')
 const fetch = require('node-fetch')
-
 const app = express()
-
-// Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded({ extended: true }))
-// Parse JSON bodies (as sent by API clients)
-app.use(express.json())
-
 const baseURL = 'https://www.metaweather.com/api'
 
 const users = [
@@ -28,15 +20,13 @@ const users = [
   }
 ]
 
-// https://stackoverflow.com/questions/4295782/how-to-process-post-data-in-node-js
-app.post('/users', (req, res) => {
-  const foundUser = users.find(
-    (e) => e.username === req.body.username && e.password === req.body.password
-  )
-  if (!foundUser) {
-    res.status(404).send('User not found!')
-  }
-  res.send(foundUser)
+app.get('/users', (req, res) => {
+  try {
+    const foundUser = users.find((user) => user.username === req.query.username && user.password === req.query.password)
+    res.send(foundUser)
+   } catch (err) {
+    res.send({ error: err.message || err.toString() })
+   }
 })
 
 app.get('/location/search', (req, res) => {
