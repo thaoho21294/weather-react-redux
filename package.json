@@ -11,6 +11,7 @@
     "express": "^4.17.1",
     "fetch-mock": "^9.4.0",
     "node-fetch": "^2.6.0",
+    "node-sass": "^6.0.0",
     "react": "^16.13.1",
     "react-autocomplete": "^1.8.1",
     "react-bootstrap": "^1.0.1",
