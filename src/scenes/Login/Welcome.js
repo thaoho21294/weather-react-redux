@@ -6,10 +6,10 @@ import './welcome.scss'
 
 function Welcome () {
   return (
-    <div className="welcome_login">
+    <div className='welcome_login'>
       <Router>
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path='/' component={Login} />
         </Switch>
       </Router>
     </div>
