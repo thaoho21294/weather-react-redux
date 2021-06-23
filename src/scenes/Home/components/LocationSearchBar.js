@@ -48,7 +48,7 @@ const LocationSearchBar = ({ onSearch }) => {
   }
 
   return (
-    <>
+    <React.Fragment>
       <Autocomplete
         items={state.foundLocations}
         getItemValue={(item) => item.title}
@@ -64,7 +64,7 @@ const LocationSearchBar = ({ onSearch }) => {
       />
       {state.error && <span className='text-danger'>{state.error}</span>}
       {state.loading && <span className='text-info'>loading...</span>}
-    </>
+    </React.Fragment>
   )
 }
 

@@ -10,15 +10,7 @@ const Login = ({ setFoundUser }) => {
   const [password, setPassword] = useState()
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
-  const loginUser = async () => {
-    return fetch(`http://localhost:3000/login?username=${username}&password=${password}`, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-  }
+
   const handleChangUsername = e => {
     setUsername(e.target.value)
   }
@@ -26,6 +18,15 @@ const Login = ({ setFoundUser }) => {
     setPassword(e.target.value)
   }
   const handleSubmit = async e => {
+    const loginUser = async () => {
+      return fetch(`http://localhost:3000/login?username=${username}&password=${password}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+    }
     e.preventDefault()
     const foundUser = await loginUser({
       username,
