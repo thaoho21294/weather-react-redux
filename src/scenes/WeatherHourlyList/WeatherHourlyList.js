@@ -38,7 +38,7 @@ const WeatherHourlyList = (props) => {
     setFilteredWeatherList(filterWeatherList)
   }
   return (
-    <>
+    <div>
       <WeatherStateSearchBar handleSearch={handleSearch} />
       <h3>{convertDateToDayName(`${year}/${month}/${day}`)}</h3>
       <Table striped bordered hover>
@@ -59,7 +59,7 @@ const WeatherHourlyList = (props) => {
       </Table>
       {error && <div className='text-danger'>{error}</div>}
       {loading && <div className='text-info'>loading...</div>}
-    </>
+    </div>
   )
 }
 

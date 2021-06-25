@@ -3,7 +3,6 @@ import { FormControl } from 'react-bootstrap'
 import Autocomplete from 'react-autocomplete'
 import { locationUri } from '../../../commons/utils'
 import PropTypes from 'prop-types'
-import fetch from 'node-fetch'
 
 const LocationSearchBar = ({ onSearch }) => {
   const [selectedLocationName, setSelectedLocationName] = useState('')

@@ -8,7 +8,7 @@ const DayList = ({ locationId }) => {
   const { data, loading, error } = useFetchData(`${locationUri}/${locationId}`, { consolidated_weather: [], title: '' }, [locationId])
 
   return (
-    <>
+    <div>
       <div className='text-info'>Location: {data.title}</div>
       <div className='days'>
         {!loading && data.consolidated_weather.map((day) => {
@@ -18,7 +18,7 @@ const DayList = ({ locationId }) => {
         {error && <div className='text-danger'> {error} </div>}
         {loading && <div className='text-info'>loading...</div>}
       </div>
-    </>
+    </div>
   )
 }
 
