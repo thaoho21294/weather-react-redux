@@ -24,9 +24,9 @@ app.get('/login', (req, res) => {
   try {
     const foundUser = users.find((user) => user.username === req.query.username && user.password === req.query.password)
     res.send(foundUser)
-   } catch (err) {
-    res.send({ error: err.message || err.toString() })
-   }
+  } catch (err) {
+    res.send({ err })
+  }
 })
 
 app.get('/location/search', (req, res) => {

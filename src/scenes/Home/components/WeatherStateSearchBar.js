@@ -11,10 +11,10 @@ const WeatherStateSearchBar = (props) => {
   }
   return (
     <FormControl
-      name="search"
-      type="text"
-      placeholder="Type weather state name ..."
-      className="mr-sm-2"
+      name='search'
+      type='text'
+      placeholder='Type weather state name ...'
+      className='mr-sm-2'
       value={text}
       onChange={onChange}
     />

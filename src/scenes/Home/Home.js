@@ -11,15 +11,15 @@ const Home = () => {
     }
   }
   return (
-  <div>
-    <h3>Today Weather</h3>
-    <section>
-      <LocationSearchBar onSearch={onSearch} />
-    </section>
-    <section>
-      <DayList locationId={locationId}></DayList>
-    </section>
-  </div>
+    <div>
+      <h3>Today Weather</h3>
+      <section>
+        <LocationSearchBar onSearch={onSearch} />
+      </section>
+      <section>
+        <DayList locationId={locationId}> </DayList>
+      </section>
+    </div>
   )
 }
 

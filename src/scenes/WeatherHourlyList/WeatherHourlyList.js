@@ -38,7 +38,7 @@ const WeatherHourlyList = (props) => {
     setFilteredWeatherList(filterWeatherList)
   }
   return (
-    <React.Fragment>
+    <div>
       <WeatherStateSearchBar handleSearch={handleSearch} />
       <h3>{convertDateToDayName(`${year}/${month}/${day}`)}</h3>
       <Table striped bordered hover>
@@ -53,13 +53,13 @@ const WeatherHourlyList = (props) => {
         </thead>
         <tbody>
           {filteredWeatherList.map((weather) => {
-            return <WeatherHourly key={weather.hour} {...weather}/>
+            return <WeatherHourly key={weather.hour} {...weather} />
           })}
         </tbody>
       </Table>
-      {error && <div className="text-danger">{error}</div>}
-      {loading && <div className="text-info">loading...</div>}
-    </React.Fragment>
+      {error && <div className='text-danger'>{error}</div>}
+      {loading && <div className='text-info'>loading...</div>}
+    </div>
   )
 }
 

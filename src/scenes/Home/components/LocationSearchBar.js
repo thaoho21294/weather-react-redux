@@ -52,7 +52,7 @@ const LocationSearchBar = ({ onSearch }) => {
         items={state.foundLocations}
         getItemValue={(item) => item.title}
         renderInput={(props) => {
-          return <FormControl name="search" type="text" placeholder="Type location..." className="mr-sm-2" {...props}/>
+          return <FormControl name='search' type='text' placeholder='Type location...' className='mr-sm-2' {...props} />
         }}
         renderItem={(item, highlighted) => (
           <div key={item.id} style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}>{item.title}</div>
@@ -61,8 +61,8 @@ const LocationSearchBar = ({ onSearch }) => {
         onChange={onChange}
         onSelect={onSelect}
       />
-      {state.error && <span className="text-danger">{state.error}</span>}
-      {state.loading && <span className="text-info">loading...</span>}
+      {state.error && <span className='text-danger'>{state.error}</span>}
+      {state.loading && <span className='text-info'>loading...</span>}
     </React.Fragment>
   )
 }

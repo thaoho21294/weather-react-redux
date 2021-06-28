@@ -24,10 +24,10 @@ const Day = ({ day }) => {
   const { locationId } = day
   return (
     <Link to={`/detail/${locationId}/${convertDateToFlashDate((day.applicable_date))}`}>
-      <div className="day" key={day.id}>
-        <div className="dayName">{toWeekday(day.applicable_date)}</div>
-        <div className="min-temp">{Math.round(day.min_temp)}</div>
-        <div className="max-temp">{Math.round(day.max_temp)}</div>
+      <div className='day' key={day.id}>
+        <div className='dayName'>{toWeekday(day.applicable_date)}</div>
+        <div className='min-temp'>{Math.round(day.min_temp)}</div>
+        <div className='max-temp'>{Math.round(day.max_temp)}</div>
       </div>
     </Link>
   )
