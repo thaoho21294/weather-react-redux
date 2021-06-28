@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import './_login.scss'
 import PropTypes from 'prop-types'
 
-const Login = ({ setFoundUser }) => {
-  const history = useHistory()
+const Login = ({ history }) => {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState(null)
@@ -66,7 +64,7 @@ const Login = ({ setFoundUser }) => {
 }
 
 Login.propTypes = {
-  setFoundUser: PropTypes.func.isRequired
+  history: PropTypes.func.isRequired
 }
 
 export default Login

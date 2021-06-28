@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import { useState, useEffect } from 'react'
 
 const useFetchData = (url, initialData = [], dependencies = []) => {
