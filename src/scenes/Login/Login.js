@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import './_login.scss'
 import PropTypes from 'prop-types'
-import useToken from '../../useToken'
+import { saveToken } from '../../useToken'
 
 const Login = ({ history }) => {
-  const { token, setToken } = useToken()
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState(null)
@@ -33,8 +32,9 @@ const Login = ({ history }) => {
       username,
       password
     })
-    setToken(foundUser)
-    if (!token === true) {
+    if (foundUser) {
+      saveToken(foundUser)
+      console.log(saveToken(foundUser))
       return history.replace('/')
     }
   }
