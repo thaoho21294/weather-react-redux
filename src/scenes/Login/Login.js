@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
+import { withRouter } from 'react-router'
 import './_login.scss'
 import PropTypes from 'prop-types'
 import { saveToken } from '../../useToken'
 
-const Login = ({ history }) => {
+const Login = () => {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState(null)
-
   const handleChangUsername = e => {
     setUsername(e.target.value)
   }
@@ -34,8 +34,7 @@ const Login = ({ history }) => {
     })
     if (foundUser) {
       saveToken(foundUser)
-      console.log(saveToken(foundUser))
-      return history.replace('/')
+      return window.location.replace('/')
     }
   }
   return (
@@ -59,7 +58,7 @@ const Login = ({ history }) => {
         </div>
         <button type='submit' className='btn btn-primary btn-block' onClick={handleSubmit}>Submit</button>
         <p className='forgot-password text-right'>
-                Forgot <a href='#'>password?</a>
+          Forgot <a href='#'>password?</a>
         </p>
       </form>
     </div>
@@ -67,8 +66,7 @@ const Login = ({ history }) => {
 }
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  setToken: PropTypes.func.isRequired
 }
 
-export default Login
+export default withRouter(Login)
