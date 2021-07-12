@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { withRouter } from 'react-router'
 import './_login.scss'
 import PropTypes from 'prop-types'
-import { saveToken } from '../../useToken'
+import { getToken, saveToken } from '../../useToken'
 
 const Login = () => {
+  if (getToken()) {
+    return window.location.replace('/')
+  }
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState(null)
@@ -32,8 +34,9 @@ const Login = () => {
       username,
       password
     })
-    if (foundUser) {
-      saveToken(foundUser)
+    console.log(getToken())
+    saveToken(foundUser)
+    if (getToken()) {
       return window.location.replace('/')
     }
   }
@@ -69,4 +72,4 @@ Login.propTypes = {
   setToken: PropTypes.func.isRequired
 }
 
-export default withRouter(Login)
+export default Login
