@@ -8,7 +8,6 @@ import Login from './scenes/Login/Login'
 import { getToken } from './useToken'
 
 function App () {
-  console.log(getToken())
   if (!getToken()) {
     return <Login />
   }

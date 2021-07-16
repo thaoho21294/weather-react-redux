@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './_login.scss'
 import PropTypes from 'prop-types'
 import { getToken, saveToken } from '../../useToken'
 
 const Login = () => {
-  if (getToken()) {
-    return window.location.replace('/')
-  }
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState(null)
@@ -16,6 +13,11 @@ const Login = () => {
   const handleChangePassword = e => {
     setPassword(e.target.value)
   }
+  useEffect(() => {
+    if (getToken()) {
+      return window.location.replace('/')
+    }
+  }, [])
   const handleSubmit = async e => {
     const loginUser = async () => {
       return fetch(`http://localhost:3000/login?username=${username}&password=${password}`, {
