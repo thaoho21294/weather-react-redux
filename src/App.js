@@ -5,9 +5,9 @@ import './App.css'
 import Home from './scenes/Home/Home'
 import WeatherHourlyList from './scenes/WeatherHourlyList/WeatherHourlyList'
 import Login from './scenes/Login/Login'
-import { getToken } from './useToken'
+import { getToken } from './auth'
 
-function App () {
+const App = () => {
   if (!getToken()) {
     return <Login />
   }

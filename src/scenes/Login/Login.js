@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './_login.scss'
-import PropTypes from 'prop-types'
-import { getToken, saveToken } from '../../useToken'
+import { getToken, saveToken } from '../../auth'
 
 const Login = () => {
   const [username, setUsername] = useState()
@@ -13,11 +12,6 @@ const Login = () => {
   const handleChangePassword = e => {
     setPassword(e.target.value)
   }
-  useEffect(() => {
-    if (getToken()) {
-      return window.location.replace('/')
-    }
-  }, [])
   const handleSubmit = async e => {
     const loginUser = async () => {
       return fetch(`http://localhost:3000/login?username=${username}&password=${password}`, {
@@ -36,12 +30,16 @@ const Login = () => {
       username,
       password
     })
-    console.log(getToken())
-    saveToken(foundUser)
-    if (getToken()) {
+    if (foundUser) {
+      saveToken(foundUser)
       return window.location.replace('/')
     }
   }
+  useEffect(() => {
+    if (getToken()) {
+      return window.location.replace('/')
+    }
+  }, [])
   return (
     <div className='logreg-forms welcome-background'>
       <form className='form-signin'>
@@ -68,10 +66,6 @@ const Login = () => {
       </form>
     </div>
   )
-}
-
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
 }
 
 export default Login
