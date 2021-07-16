@@ -32,12 +32,12 @@ const Login = () => {
     })
     if (foundUser) {
       saveToken(foundUser)
-      return window.location.replace('/')
+      window.location.replace('/')
     }
   }
   useEffect(() => {
     if (getToken()) {
-      return window.location.replace('/')
+      window.location.replace('/')
     }
   }, [])
   return (
