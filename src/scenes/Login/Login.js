@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './_login.scss'
-import PropTypes from 'prop-types'
+import { getToken, saveToken } from '../../auth'
 
-const Login = ({ history }) => {
+const Login = () => {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [error, setError] = useState(null)
-
   const handleChangUsername = e => {
     setUsername(e.target.value)
   }
@@ -32,9 +31,15 @@ const Login = ({ history }) => {
       password
     })
     if (foundUser) {
-      return history.replace('/')
+      saveToken(foundUser)
+      window.location.replace('/')
     }
   }
+  useEffect(() => {
+    if (getToken()) {
+      window.location.replace('/')
+    }
+  }, [])
   return (
     <div className='logreg-forms welcome-background'>
       <form className='form-signin'>
@@ -56,15 +61,11 @@ const Login = ({ history }) => {
         </div>
         <button type='submit' className='btn btn-primary btn-block' onClick={handleSubmit}>Submit</button>
         <p className='forgot-password text-right'>
-                Forgot <a href='#'>password?</a>
+          Forgot <a href='#'>password?</a>
         </p>
       </form>
     </div>
   )
-}
-
-Login.propTypes = {
-  history: PropTypes.object.isRequired
 }
 
 export default Login
