@@ -5,7 +5,7 @@ import './App.css'
 import Home from './scenes/Home/Home'
 import WeatherHourlyList from './scenes/WeatherHourlyList/WeatherHourlyList'
 import Login from './scenes/Login/Login'
-import { getToken } from './auth'
+import { getToken } from './commons/auth'
 
 const App = () => {
   if (!getToken()) {

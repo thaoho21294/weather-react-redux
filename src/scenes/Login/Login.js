@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './_login.scss'
-import { getToken, saveToken } from '../../auth'
+import { getToken, saveToken } from '../../commons/auth'
 
 const Login = () => {
   const [username, setUsername] = useState()
@@ -14,7 +14,7 @@ const Login = () => {
   }
   const handleSubmit = async e => {
     const loginUser = async () => {
-      return fetch(`http://localhost:3000/login?username=${username}&password=${password}`, {
+      return fetch(`login?username=${username}&password=${password}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json'
@@ -46,11 +46,11 @@ const Login = () => {
         <h3>Sign in</h3>
         <div className='form-group'>
           <label>Username</label>
-          <input type='name' className='form-control' value={username} onChange={handleChangUsername} placeholder='Enter Username' />
+          <input type='name' className='form-control' onChange={handleChangUsername} placeholder='Enter Username' />
         </div>
         <div className='form-group'>
           <label>Password</label>
-          <input type='password' className='form-control' value={password} onChange={handleChangePassword} placeholder='Enter password' />
+          <input type='password' className='form-control' onChange={handleChangePassword} placeholder='Enter password' />
         </div>
         {error && <span className='text-danger form-signin'>Username or password incorrect! </span>}
         <div className='form-group'>
